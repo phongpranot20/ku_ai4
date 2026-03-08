@@ -31,7 +31,8 @@ export async function getChatResponse(message: string, history: any[] = []) {
     model: "gemini-flash-latest",
     config: {
       systemInstruction: SYSTEM_INSTRUCTION,
-      tools: [{ googleSearch: {} }],
+      // Temporarily disable googleSearch to avoid 429 quota issues on free tier
+      // tools: [{ googleSearch: {} }],
     },
     history: history,
   });

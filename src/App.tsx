@@ -77,7 +77,9 @@ export default function App() {
           role: 'model', 
           text: isApiKeyMissing 
             ? "❌ **ไม่พบ API Key:** ระบบไม่สามารถดึงค่า `VITE_GEMINI_API_KEY` ได้ กรุณาตรวจสอบว่าคุณได้ตั้งค่าใน Vercel และทำการ **Redeploy** แล้วหรือยัง?"
-            : `❌ **เกิดข้อผิดพลาด:** ${errorMessage}\n\n*(คำแนะนำ: ลองตรวจสอบว่า API Key ของคุณเปิดใช้งาน Gemini API แล้วหรือยัง หรือลองสร้าง Key ใหม่ครับ)*`
+            : errorMessage.includes("429") || errorMessage.includes("QUOTA")
+              ? "❌ **โควตาเต็ม (Error 429):** API Key นี้ใช้งานเกินขีดจำกัดแล้ว\n\n**วิธีแก้:**\n1. หากคุณเพิ่งเปลี่ยน Key ใน Vercel คุณต้องกด **Redeploy** ในหน้า Deployments ด้วย\n2. หากยังไม่ได้ผล ลองสร้าง API Key ใหม่จาก Google AI Studio ครับ"
+              : `❌ **เกิดข้อผิดพลาด:** ${errorMessage}\n\n*(คำแนะนำ: ลองตรวจสอบว่า API Key ของคุณเปิดใช้งาน Gemini API แล้วหรือยัง หรือลองสร้าง Key ใหม่ครับ)*`
         },
       ]);
     } finally {
