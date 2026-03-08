@@ -1,0 +1,5 @@
+{
+  "name": "KU AI Chatbot",
+  "description": "AI Assistant for Kasetsart University students and staff, providing information about registration, campus life, and more.",
+  "requestFramePermissions": []
+}
