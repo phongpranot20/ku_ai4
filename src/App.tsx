@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Loader2, Info, ExternalLink, GraduationCap, Sparkles, MessageSquare, BookOpen, MapPin, Calendar, Menu, X, Image as ImageIcon, Trash2 } from 'lucide-react';
 import Markdown from 'react-markdown';
 import { motion, AnimatePresence } from 'motion/react';
-import { getChatResponse, getChatResponseStream } from './services/gemini';
+import { getChatResponse, getChatResponseStream, AVAILABLE_MODELS } from './services/gemini';
 import { cn } from './lib/utils';
 
 interface Message {
