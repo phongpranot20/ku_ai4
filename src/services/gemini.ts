@@ -112,10 +112,11 @@ export async function getChatResponse(message: string, history: any[] = [], imag
 function handleGeminiError(error: any) {
   const errorMsg = error?.message || "";
   const apiKey = process.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY || "";
-  const maskedKey = apiKey ? `${apiKey.substring(0, 6)}...` : "ไม่พบคีย์";
+  const maskedKey = apiKey ? `${apiKey.substring(0, 8)}...` : "ไม่พบคีย์";
+  const lastUpdate = "30 มี.ค. 2569 - 22:15 (UTC)"; // เวลาอัปเดตล่าสุด
 
   if (errorMsg.includes('429') || errorMsg.includes('RESOURCE_EXHAUSTED')) {
-    throw new Error(`โควต้าเต็ม (Quota Exceeded)\n\nคีย์ที่ใช้อยู่: ${maskedKey}\n\n**วิธีแก้:**\n1. หากคีย์ยังเป็นอันเก่า ให้ไปที่ Vercel -> Deployments -> กด **Redeploy**\n2. หากคีย์ใหม่แล้วยังติด แสดงว่าบัญชีนี้ใช้ครบโควต้าฟรีของวันแล้ว ให้ลองสร้างคีย์จาก Google Account อื่นครับ`);
+    throw new Error(`โควต้าเต็ม (Quota Exceeded)\n\n🕒 เวอร์ชันแอป: ${lastUpdate}\n🔑 คีย์ที่ใช้อยู่: ${maskedKey}\n\n**วิธีแก้:**\n1. หากคีย์ยังเป็นอันเก่า ให้ตรวจสอบว่าใส่ใน Vercel ถูกต้องและ Commit แล้ว\n2. หากคีย์ใหม่แล้วยังติด แสดงว่า **"โปรเจกต์"** ใน AI Studio เต็มแล้ว ให้ลอง **"สร้างโปรเจกต์ใหม่"** ใน AI Studio แล้วเจนคีย์ใหม่จากโปรเจกต์นั้นครับ`);
   }
   throw error;
 }
